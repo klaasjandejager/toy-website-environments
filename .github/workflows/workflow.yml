@@ -14,21 +14,21 @@ jobs:
     uses: klaasjandejager/toy-website-environments/.github/workflows/lint.yml@main
 
 # Deploy to the test environment.
-deploy-test:
-  uses: klaasjandejager/toy-website-environments/.github/workflows/deploy.yml@main
-  needs: lint
-  with:
-    environmentType: Test
-    resourceGroupName: ToyWebsiteTest
-  secrets:
-    AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_TEST }}
+  deploy-test:
+    uses: klaasjandejager/toy-website-environments/.github/workflows/deploy.yml@main
+    needs: lint
+    with:
+      environmentType: Test
+      resourceGroupName: ToyWebsiteTest
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_TEST }}
 
 # Deploy to the production environment.
-deploy-production:
-  uses: klaasjandejager/toy-website-environments/.github/workflows/deploy.yml@main
-  needs: deploy-test
-  with:
-    environmentType: Production
-    resourceGroupName: ToyWebsiteProduction
-  secrets:
-    AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
+  deploy-production:
+    uses: klaasjandejager/toy-website-environments/.github/workflows/deploy.yml@main
+    needs: deploy-test
+    with:
+      environmentType: Production
+      resourceGroupName: ToyWebsiteProduction
+    secrets:
+      AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
